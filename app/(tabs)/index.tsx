@@ -6,16 +6,20 @@ export default function App() {
   const [lista, setLista] = useState([]);
   const [carregando, setCarregando] = useState(false);
 
-  // LEMBRETE: Mantenha o seu IP real aqui!
+  // SEU IP ATUALIZADO
   const API_URL = 'http://192.168.0.18:3000/api/cripto/preco';
 
   const buscarDados = async () => {
     setCarregando(true);
     try {
-      const resposta = await axios.get(API_URL);
+      const resposta = await axios.get(API_URL, {
+        headers: {
+          'x-api-key': 'MarcioSeguranca2026@' // ENVIANDO O CRACHÁ
+        }
+      });
       setLista(resposta.data.dados);
     } catch (error) {
-      console.error("Erro no App:", error.message);
+      console.error("Erro de Autenticação/Rede:", error.message);
     }
     setCarregando(false);
   };
